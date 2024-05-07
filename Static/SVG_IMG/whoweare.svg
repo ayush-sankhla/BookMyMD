@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <style>
+      .a {
+        fill: #d3d4ed;
+      }
+    </style>
+  </defs>
+  <title>13 Before and after</title>
+  <path class="a" d="M43,6H26.5V2.5a2.5,2.5,0,0,0-5,0V6H5a5,5,0,0,0-5,5V37a5,5,0,0,0,5,5H21.5v3.5a2.5,2.5,0,0,0,5,0V42H43a5,5,0,0,0,5-5V11A5,5,0,0,0,43,6ZM5,38a1,1,0,0,1-1-1V11a1,1,0,0,1,1-1H21.5V38Z" id="id_101" style="fill: rgb(91, 33, 255);"></path>
+</svg>

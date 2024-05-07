@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BookMyMD</title>
+    <link rel="icon" type="image/png" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/User_Profile.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <img src="/Static/SVG_IMG/logo_2.png">
+            <h1>Please complete profile</h1>
+        </div>
+        
+        <form action="#">
+            <div class="form_content">
+                <h3>Personal Details</h3>
+                <div class="fields">
+                    <div class="input_field">
+                        <label>First Name</label>
+                        <input type="text" name="firstname" required>
+                    </div>
+                    <div class="input_field">
+                        <label>Last Name</label>
+                        <input type="text" name="lastname" required>
+                    </div>
+                    <div class="input_field">
+                        <label>Date of Birth</label>
+                        <input type="date" name="dob" required>
+                    </div>
+                    <div class="input_field">
+                        <label>Enter Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="input_field">
+                        <label>Gender</label>
+                        <select name="gender" id="gender" >
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="input_field">
+                        <label>Mobile Number</label>
+                        <input type="number" name="number" required>
+                    </div>
+                    <div class="input_field">
+                        <label>Select Blood Group</label>
+                        <select name="blood_group" id="blood_group">
+                            <option value="">Select</option>
+                            <option value="A+">A+</option>
+                            <option value="B+">B+</option>
+                            <option value="AB+">AB+</option>
+                            <option value="A-">A-</option>
+                            <option value="AB-">AB-</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form_content">
+                <h3>Address Details</h3>
+                <div class="fields">
+                    <div class="address_input_field">
+                        <label>Address Line 1</label>
+                        <input type="text" name="add1" required>
+                    </div>
+                    <div class="input_field2">
+                        <label>Address Line 2</label>
+                        <input type="text" name="add2" required>
+                    </div>
+                    <div class="input_field2">
+                        <label>Landmark</label>
+                        <input type="text" name="addlandmark">
+                    </div>
+                    <div class="input_field">
+                        <label>City</label>
+                        <input type="text" name="city" required>
+                    </div>
+                    <div class="input_field">
+                        <label>State</label>
+                        <input type="text" name="state" required>
+                    </div>
+                    <div class="input_field">
+                        <label>Pin Code</label>
+                        <input type="number" name="pincode" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form_content">
+                <h3>Password</h3>
+                <div class="fields">
+                    <div class="input_field2">
+                        <label>Password</label>
+                        <input type="Password" name="password1" required>
+                    </div>
+                    <div class="input_field2">
+                        <label>Confirm Password</label>
+                        <input type="Password" name="password2" required>
+                    </div>
+                </div>
+            </div>
+            <div class="g-recaptcha" id="g-recaptcha-response" data-sitekey="6LcT0r8pAAAAAKLMXqvNRnWKjeVUvCoIZ7TA-3VT" style="transform:scale(0.75);-webkit-transform:scale(0.75);transform-origin:0 0;-webkit-transform-origin:0 0; margin-top: 20px;"></div>
+            <button class="sub_btn" type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

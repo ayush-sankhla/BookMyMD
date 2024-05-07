@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookMyMD</title>
+    <link rel="icon" type="image/jpg" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/Home_Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar starts here -->
+    <div class="landing_page">
+        <section class="Navbar">
+            <nav class="navigation">
+                <div class="logo">
+                    <img src="/Static/SVG_IMG/logo.png" alt="Logo">
+                </div>
+                <ul class="sidebar">
+                    <img onclick="closesidebar()" class="closebaricon" src="/Static/SVG_IMG/close_menu.svg">
+                    <li class="sidenav"><a href="">Home</a></li>
+                    <li class="sidenav"><a href="">About</a></li>
+                    <li class="sidenav"><a href="">Doctors</a></li>
+                    <li class="sidenav"><a href="">Appointments</a></li>
+                    <li class="sidenav"><a href="">Contact Us</a></li>
+                </ul>
+                <ul class="nav_links">
+                    <li class="nav_links"><a href="">Home</a></li>
+                    <li class="nav_links"><a href="">About</a></li>
+                    <li class="nav_links"><a href="">Doctors</a></li>
+                    <li class="nav_links"><a href="">Appointments</a></li>
+                    <li class="nav_links"><a href="">Contact Us</a></li>
+                </ul>
+                <div class="mnicon">
+                    <a href="{% url 'User_Login' %}"><button class="login_btn">Login</button></a>
+                    <a href="{% url 'User_Register' %}"><button class="btn reg_btn_active">Register</button></a>
+                    <img onclick="showsidebar()" class="menuicon" src="/Static/SVG_IMG/Menu_icon.svg">
+                </div>
+            </nav>
+        </section>
+
+        <div class="container">
+
+            <!-- Home Starts here -->
+
+            <section class="main_content">
+                <header class="header">
+                    <div class="content">
+                        <h1>
+                            Healthcare at Your Fingertips:<br><span>Book, Heal, Thrive!</span>
+                        </h1>
+                        <p>Welcome to BookMyMD, your one-stop solution for hassle-free medical appointment bookings. Say
+                            goodbye to long waits and endless calls. With just a few clicks, find and book appointments
+                            with trusted healthcare professionals. <br>Join us in prioritizing convenience and peace of
+                            mind in your health journey.</p>
+                        <button class="btn book_btn">Book Now</button>
+                    </div>
+                    <div class="main_svg">
+                        <img src="/Static/SVG_IMG/doctor-animate (1).svg">
+                    </div>
+                </header>
+            </section>
+        </div>
+    </div>
+    <div class="container2">
+
+        <!-- Categories Starts here -->
+
+        <section class="categories">
+            <h1 class="explore_heading">Explore by Categories</h1>
+            <p class="explore_para">Discover a tailored selection of medical experts across various specialties in our
+                organized directory.
+                Find the right healthcare provider tailored to your needs. Simplify your search and make informed
+                decisions about your health with ease.
+            </p>
+            <div class="categories_cards">
+                <div class="cat_card">
+                    <div class="cat_card_icon"><img src="/Static/SVG_IMG/heart.svg"></div>
+                    <h1 class="cathead">Cardiologist</h1>
+                    <p class="cat_p">Cardiologists specialize in diagnosing and treating heart-related conditions.</p>
+                    <a class="explore_link">Find here <img src="/Static/SVG_IMG/arrow.svg"></a>
+                </div>
+                <div class="cat_card">
+                    <div class="cat_card_icon"><img src="/Static/SVG_IMG/runner.svg"></div>
+                    <h1 class="cathead">Physicians</h1>
+                    <p class="cat_p">Physicians are skilled medical experts who diagnose and treat illnesses, offering
+                        personalized care to promote healing and well-being.</p>
+                    <a class="explore_link">Find here <img src="/Static/SVG_IMG/arrow.svg"></a>
+                </div>
+                <div class="cat_card">
+                    <div class="cat_card_icon"><img src="/Static/SVG_IMG/brain.svg"></div>
+                    <h1 class="cathead">Neurologist</h1>
+                    <p class="cat_p">Neurologists specialize in diagnosing and treating disorders of the nervous system
+                        and brain.</p>
+                    <a class="explore_link">Find here <img src="/Static/SVG_IMG/arrow.svg"></a>
+                </div>
+                <div class="cat_card">
+                    <div class="cat_card_icon"><img src="/Static/SVG_IMG/teeth.svg"></div>
+                    <h1 class="cathead">Dentist</h1>
+                    <p class="cat_p">Dentists specialize in oral health, offering preventive care, treatments for dental
+                        issues, and cosmetic procedures to enhance your smile.</p>
+                    <a class="explore_link">Find here <img src="/Static/SVG_IMG/arrow.svg"></a>
+                </div>
+                <div class="cat_card">
+                    <div class="cat_card_icon"><img src="/Static/SVG_IMG/eye.svg"></div>
+                    <h1 class="cathead">Ophthalmologist</h1>
+                    <p class="cat_p">Ophthalmologists specialize in eye care, providing comprehensive services from
+                        routine exams to surgical interventions, ensuring optimal vision health.</p>
+                    <a class="explore_link">Find here <img src="/Static/SVG_IMG/arrow.svg"></a>
+                </div>
+            </div>
+            <div class="showallbtn">
+                <button class="btn">Show all</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Vision, Mission -->
+
+    <section class="mvs">
+        <div class="mvcontent">
+            <div class="mv">
+                <h1><img class="img10" src="/Static/SVG_IMG/mission.svg"> Our Mission</h1>
+                <p>we're on a mission to simplify healthcare access by streamlining doctor appointment bookings. Our
+                    goal is to ensure everyone can easily connect with trusted healthcare professionals whenever they
+                    need, wherever they are.</p>
+            </div>
+            <div class="mv">
+                <h1><img class="img11" src="/Static/SVG_IMG/vision.svg"> Our Vision </h1>
+                <p>We envision a future where booking a doctor's appointment is as easy as ordering a meal online. Our
+                    aim is to eliminate the hassle of long wait times and paperwork, making healthcare more accessible
+                    and convenient for all.</p>
+            </div>
+            <div class="mv">
+                <h1><img class="img12" src="/Static/SVG_IMG/whoweare.svg"> Who we are?</h1>
+                <p>BookMyMD is a team of healthcare enthusiasts and tech experts dedicated to improving the healthcare
+                    experience. We're committed to creating user-friendly solutions that empower patients and providers
+                    alike, built on transparency, reliability, and accessibility.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How we work starts here -->
+
+    <section class="how_we_work">
+        <h2>| How we work |</h2>
+        <h1>Our Working Process</h1>
+        <div class="howwork">
+            <div class="workingcards">
+                <div class="work_icon_back back_col_1">
+                    <img src="/Static/SVG_IMG/work_search.svg">
+                </div>
+                <h1>Search & Selection</h1>
+                <p>Find the perfect healthcare provider tailored to your needs on BookMyMD. Enter your location, preferred specialty, and appointment time to discover a curated list of trusted professionals.</p>
+            </div>
+            <div class="workingcards">
+                <div class="work_icon_back back_col_2">
+                    <img src="/Static/SVG_IMG/work_book.svg">
+                </div>
+                <h1>Booking Request</h1>
+                <p>Easily request your appointment with BookMyMD. Simply select your preferred time slot and provide necessary details for a seamless booking process.</p>
+            </div>
+            <div class="workingcards">
+                <div class="work_icon_back back_col_3">
+                    <img src="/Static/SVG_IMG/work_confirm.svg">
+                </div>
+                <h1>Confirmation & Scheduling</h1>
+                <p>Instantly confirm your appointment with BookMyMD. Our system swiftly checks availability and updates your schedule, ensuring a hassle-free experience synced with both your and the provider's calendars.</p>
+            </div>
+            <div class="workingcards">
+                <div class="work_icon_back back_col_4">
+                    <img src="/Static/SVG_IMG/work_feedback.svg">
+                </div>
+                <h1>Follow-Up & Feedback</h1>
+                <p>After your visit, BookMyMD stays by your side. Access post-appointment support and share your feedback to help us continually enhance your healthcare experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section class="contact_section">
+        <div class="contact">
+            <h1>Have Question ? Get in touch</h1>
+            <p>Need assistance or have a question? Contact BookMyMD! Our dedicated team is here to support you on your healthcare journey.</p>
+            <button class="btn contact_btn"><img class="contact_img" src="/Static/SVG_IMG/contact.svg">Contact Us</button>
+        </div>
+    </section>
+
+    <!-- Footer Starts here -->
+
+    <section class="footer_section">
+        <footer class="footer">
+            <div class="footer_container">
+                <div class="footer_row">
+                    <div class="footer_col">
+                        <h2>Contact Us</h2>
+                        <ul>
+                            <li><a href="">Mail : xyz@bookmymd.com</a></li>
+                            <li>Phone : +91 1234567890</li>
+                            <li>Phone : +91 1234567890</li>
+                            <li>Address : Indore (M.P.)</li>
+                        </ul>
+                    </div>
+                    <div class="footer_col">
+                        <h2>Company</h2>
+                        <ul>
+                            <li><a href="">About Us</a></li>
+                            <li><a href="">Terms & conditions</a></li>
+                            <li><a href="">Privacy Policy</a></li>
+                            <li><a href="">FAQ's</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer_col">
+                        <h2>Quick Links</h2>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">About</a></li>
+                            <li><a href="">Doctors</a></li>
+                            <li><a href="">Patients</a></li>
+                            <li><a href="">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer_col">
+                        <h2>Social Links</h2>
+                        <div class="social_links">
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <h4 class="copyright_text">&copy; BookMyMD 2024, All rights reserved.</h4>
+            </div>
+        </footer>
+
+    </section>
+
+    <script>
+        function showsidebar() {
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.transform = 'translateX(0)'
+        }
+        function closesidebar() {
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.transform = 'translateX(450px)'
+        }
+
+
+        window.addEventListener("scroll", function () {
+            var nav = document.querySelector('nav');
+            nav.classList.toggle("nav_shadow", window.scrollY > 50);
+        })
+    </script>
+</body>
+
+</html>

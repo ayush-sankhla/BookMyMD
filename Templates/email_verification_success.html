@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verifiaction Successful - BookMyMD</title>
+    <link rel="icon" type="image/png" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/Email_Verification_Success_Style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="mail_svg">
+            <img src="/Static/SVG_IMG/email_verification_success.svg" alt="">
+        </div>
+        <div class="content">
+            {% if messages %}
+                {% for message in messages %}
+                    <h1 class="heading">{{ message }}</h1>
+                {% endfor %}
+            {% else %}
+                <h1 class="heading">Hurray! Email Verification Success!</h1>
+            {% endif %}
+            <h2>Welcome Aboard: Your Health Journey Begins Here!</h2>
+            <p>Thank you for choosing BookMyMD for your healthcare needs. We're here to help you on your journey to better health every step of the way.</p>
+            <a href="{% url 'User_Login' %}">
+                <button class="resendbtn">Login</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

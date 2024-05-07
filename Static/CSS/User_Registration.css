@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary_col: #5B21FF;
+    --primary_col_dark: #4b11e8;
+    --col_blk: #000;
+    --col_wht: #fff;
+    --col_text_light: #666666;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 100vh;
+    overflow: hidden;
+    background-image: linear-gradient(rgba(0,0,0,0.10),rgba(0,0,0,0.10)),url(/Static/SVG_IMG/bg_img_3.svg);
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background-color: var(--col_wht);
+    border-radius: 10px;
+}
+
+.container h1 {
+    text-align: center;
+    padding:  0 0 20px 0;
+    border-bottom: 1px solid var(--col_blk);
+}
+
+.alert {
+    max-width: 80%;
+    margin: auto;
+    min-height: 40px;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 40px;
+    color: var(--col_wht);
+    background-color: var(--primary_col);
+    border-radius: 5px;
+}
+
+.container form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.text_field {
+    position: relative;
+    border-bottom: 2px solid var(--col_text_light);
+    margin: 30px 0;
+}
+
+.text_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.text_field label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: var(--col_text_light);
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.text_field span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary_col);
+    transition: 0.5s;
+}
+
+.text_field input:focus ~ label,
+.text_field input:valid ~ label {
+    top: -5px;
+    color: var(--primary_col);
+    font-size: 13px;
+}
+
+.text_field input:focus ~ span::before,
+.text_field input:valid ~ span::before {
+    width: 100%;
+    left: 0;
+}
+
+.sub_btn {
+    margin: 20px 0;
+    width: 100%;
+    height: 40px;
+    background-color: var(--primary_col);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--col_wht);
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.sub_btn:hover {
+    background-color: var(--primary_col_dark);
+}
+
+.signup_link {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--col_text_light);
+    cursor: default;
+}
+
+.signup_link a {
+    color: var(--primary_col);
+    text-decoration: none;
+}
+
+@media (width<350px) {
+    body {
+        background: var(--col_wht);
+    }
+    .container{
+        width: 100%;
+    }
+    .container h1 {
+        border: none;
+    }
+}

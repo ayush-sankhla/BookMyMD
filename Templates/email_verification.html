@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verifiaction - BookMyMD</title>
+    <link rel="icon" type="image/png" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/Email_Verification_Style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="mail_svg">
+            <img src="/Static/SVG_IMG/email_verification_mail_sent_svg.svg" alt="">
+        </div>
+        <div class="content">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <h1 class="heading">{{ message }}</h1>
+                {% endfor %}
+            {% else %}
+                <h1 class="heading">Verify your email address</h1>
+            {% endif %}
+
+            <h2>We've sent an email to :</h2>
+            <h3 class="email">{{ email }}</h3>
+            <p>
+                Please confirm your email address by clicking on the link you have received in your inbox.
+            </p>
+            <a href="#">
+                <button class="resendbtn">Resend Email</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

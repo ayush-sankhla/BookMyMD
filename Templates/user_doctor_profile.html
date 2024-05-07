@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile - BookMyMD</title>
+    <link rel="icon" type="image/jpg" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/USer_Doctor_Profile_Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="/Static/SVG_IMG/logo_2.png" alt="">
+            </div>
+            <div class="appointment_booking">
+                <form action="{% url 'Appointment_Booking' %}" method="post">
+                    {% csrf_token %}
+                    <input type="date" name="appointment_date">
+                    <button type="submit">Book Appointment</button>
+                </form>
+            </div>
+        </header>
+
+        <section class="user_profile card">
+            <div class="profile">
+                <img src="/Media/{{Doctor_Profile_obj.profile_picture}}" alt="Profile Image">
+            </div>
+        </section>
+
+        <section class="Contact_Education card">
+            <h1 class="heading">Information</h1>
+            <div class="c_e_information">
+                <span class="data_head">Clinic Mobile No : <span class="data">{{Doctor_Profile_obj.clinic_number}}</span></span>
+            </div>
+            <div class="c_e_information">
+                <span class="data_head">Degree : <span class="data">{{Doctor_Profile_obj.degree}}</span></span>
+            </div>
+            <div class="c_e_information">
+                <span class="data_head">Speciality : <span class="data">{{Doctor_Profile_obj.specialist}}</span></span>
+            </div>
+            <div class="c_e_information">
+                <span class="data_head">Experience : <span class="data">{{Doctor_Profile_obj.experience}} Years</span></span>
+            </div>
+            <div class="c_e_information">
+                <span class="data_head">Fees : <span class="data">₹ {{Doctor_Profile_obj.fees}}</span></span>
+            </div>
+            <div class="c_e_information">
+                <span class="data_head">Days Available : <span class="data">{{Doctor_Profile_obj.days_available}}</span></span>
+            </div>
+        </section>
+
+        <section class="user_details card">
+            <div class="details">
+                <h1>{{Doctor_Profile_obj.full_name}}</h1>
+            </div>
+            <div class="info">
+                <span class="data_head">Bio :</span>
+                <span class="data">{{Doctor_Profile_obj.bio}}</span>
+            </div>
+        </section>
+
+        <section class="address_info card">
+            <div class="hospital_address_info">
+                <h1 class="heading">Hospital Address</h1>
+                <div class="add_info">
+                    <span class="data_head">Hospital Name : <span class="data">{{Doctor_Profile_obj.hospital_name}}</span></span>
+                </div>
+                <div class="add_info">
+                    <span class="data_head">Hospital Address : <span class="data">{{Doctor_Profile_obj.hospital_address}}</span></span>
+                </div>
+                <div class="add_info">
+                    <span class="data_head">State : <span class="data">{{Doctor_Profile_obj.hospital_state}}</span></span>
+                </div>
+                <div class="add_info">
+                    <span class="data_head">Pincode : <span class="data">{{Doctor_Profile_obj.hospital_pincode}}</span></span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

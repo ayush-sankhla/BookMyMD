@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary_col: #5B21FF;
+    --primary_col_dark: #4b11e8;
+    --col_blk: #000;
+    --col_wht: #fff;
+    --col_text_light: #666666;
+    --col_body_bg: #6868ff;
+    --col_input_light: #ada3ff;
+    --col_body_bg2: #ff2c2c;
+    --col_main_bg: #f3eeff;
+}
+
+body {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--col_main_bg);
+}
+
+.container {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    background-color: var(--col_wht);
+    margin: 30px 15px;
+    border-radius: 10px;  
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.30);
+}
+
+.heading {
+    margin: 20px;
+}
+
+.heading img{
+    width: 150px;
+}
+
+.container h1 {
+    font-size: 25px;
+    width: 100%;
+    margin-left: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--col_blk); 
+}
+
+.form_content h3{
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.container form {
+    position: relative;
+    min-height: 500px;
+    margin: 30px;
+}
+
+.fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.input_field {
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+}
+
+.input_field label, .address_input_field label, .input_field2 label {
+    font-size: 13px;
+    color: var(--col_text_light);
+    /
+}
+
+.address_input_field {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.input_field2 {
+    display: flex;
+    width: calc(100% / 2 - 15px);
+    flex-direction: column;
+}
+
+.input_field input, .input_field select, .address_input_field input, .input_field2 input {
+    height: 30px;
+    margin: 8px 0;
+    padding: 0 15px;
+    outline: none;
+    border: 1px solid var(--col_text_light);
+    border-radius: 4px;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.input_field input:focus, .address_input_field input:focus, .input_field2 input:focus {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.10);
+}
+
+.sub_btn {
+    background-color: var(--primary_col);
+    height: 30px;
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--col_wht);
+    font-size: 14px;
+    font-weight: 500;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.sub_btn:hover {
+    background-color: var(--primary_col_dark);
+}
+
+
+
+@media only screen and (min-width: 500px) and (max-width: 650px) {
+    .input_field {
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (width < 500px) {
+    .input_field {
+        width: 100%;
+    }
+    .input_field2 {
+        width: 100%;
+    }
+}

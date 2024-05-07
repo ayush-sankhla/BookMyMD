@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - BookMyMD</title>
+    <link rel="icon" type="image/jpg" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/Staff_Home_Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <img class="logo" src="/Static/SVG_IMG/logo_2.png">
+                </li>
+                <li>
+                    <a href="/staff/home">
+                        <div class="nav_icon_back">
+                            <i class="fa-solid fa-desktop"></i>
+                        </div>
+                        <div class="title">Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/staff/home">
+                        <div class="nav_icon_back">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div class="title">Doctor</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/staff/home/verification/pending">
+                        <div class="nav_icon_back">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="title">Verification Pending</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="top-bar">
+                <div class="mnicon">
+                    <img onclick="sidebar()" class="menuicon" src="/Static/SVG_IMG/Menu_icon.svg">
+                </div>
+                <form method="post" action="{% url 'Logout_Staff' %}">
+                    {% csrf_token %}
+                    <button class="user" type="submit">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </div>
+            <div class="data">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="cards">
+                    <div class="card">
+                        <div class="icon_box">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="number">100</div>
+                            <div class="card-name">Verified Doctors</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="icon_box">
+                            <i class="fa-solid fa-user-clock"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="number">200</div>
+                            <div class="card-name">Verification Pending</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="icon_box">
+                            <i class="fa-solid fa-users-line"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="number">100</div>
+                            <div class="card-name">Total Doctors</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tables">
+                    <div class="pending_request">
+                        <div class="heading">
+                            <div class="main_head">
+                                <i class="fa-solid fa-hourglass-half"></i>
+                                <h2>Pending Verification</h2>
+                            </div>
+                            <a href="/staff/home/verification/pending" class="btn">View All</a>
+                        </div>
+                        <table class="requests">
+
+                            {% if Doctor_Profile_obj %}
+                                {% for value in Doctor_Profile_obj %}
+                                    <tr>
+                                        <td class="Profile_picture"><img src="/Media/{{value.0}}"></td>
+                                        <td class="Doc_Name">{{value.1}}</td>
+                                        <td class="Doc_Degree">{{value.2}}</td>
+                                        <td class="Doc_City active_column">{{value.3}}</td>
+                                        <td class="Specialist active_column">{{value.4}}</td>
+                                        <td class="Action">
+                                            <a href="/staff/doctor/profile/{{value.5}}"><i class="fa fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <div class="no_request">No Verification Request</div>
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let value = 0;   // 1 means close 0 means open
+
+        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+        if (width <= 1000) {
+            value = 1;
+        }
+
+        function sidebar() {
+
+            const sidebar = document.querySelector('.sidebar');
+            const main = document.querySelector('.main');
+            const top_bar = document.querySelector('.top-bar');
+            const user = document.getElementById('user_display');
+
+            if (value == 0) {
+                sidebar.style.transform = 'translateX(-280px)';
+                main.style.transform = 'translateX(-280px)';
+                main.style.width = '100%';
+                top_bar.style.width = '100%';
+                main.style.transition = '1s';
+                value = 1;
+                console.log(value);
+
+                if (width < 830 && width > 400) {
+                    top_bar.style.transform = 'translateX(0)';
+                }
+                if (width < 400) {
+                    top_bar.style.transform = 'translateX(0)';
+                    user.style.display = 'flex'
+                    top_bar.style.padding = '0 35px';
+                }      
+            }
+
+            else {
+                sidebar.style.transform = 'translateX(0)';
+
+                if (width > 830) {
+                    main.style.transform = 'translateX(0px)';
+                    main.style.width = 'calc(100% - 280px)';
+                    top_bar.style.transform = 'translateX(0px)';
+                }
+
+                else if (width < 400){
+                    top_bar.style.width = 'calc(100% - 280px)';
+                    top_bar.style.transform = 'translateX(280px)';
+                    user.style.display = 'none';
+                    top_bar.style.padding = '0 5px';
+                }
+
+                else {
+                    top_bar.style.width = 'calc(100% - 280px)';
+                    top_bar.style.transform = 'translateX(280px)';
+                }
+                
+                main.style.transition = '1s';
+                top_bar.style.transition = '1s';
+                value = 0 ;
+                console.log(value);
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

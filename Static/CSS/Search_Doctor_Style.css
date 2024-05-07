@@ -1,0 +1,436 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+    --primary_col: #5B21FF;
+    --primary_col_dark: #4b11e8;
+    --col_blk: #000;
+    --col_wht: #fff;
+    --col_nav_icon_back: #ededed;
+    --col_main_bg: #f3eeff;
+    --col_back_icon: #baa9e74a;
+    --col_text_light: #2d2d2d;
+    --col_table_border: #787878;
+    --col_table_row_bg: #eaeaea;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.logo {
+    margin-left: 25px;
+    width: 100px;
+}
+
+.sidebar {
+    position: fixed;
+    width: 280px;
+    height: 100%;
+    background: var(--col_wht);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    transition: 1s;
+}
+
+.sidebar ul li {
+    width: 100%;
+    list-style: none;
+}
+
+.profile_list {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--col_blk);
+}
+
+.profile_list h1 {
+    padding: 10px;
+}
+
+.profile_img {
+    background: url(/Static/SVG_IMG/profile-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+.sidebar ul li .logo{
+    width: 180px;
+}
+
+.profile_img img {
+    width: 100px;
+    border-radius: 50%;
+    background-color: var(--col_wht);
+    display: block;
+    margin: auto;
+}
+
+.sidebar ul li:first-child {
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li:not(:first-child, .second_nav) {
+    margin-left: 20px;
+}
+
+.sidebar ul li a {
+    width: 100%;
+    text-decoration: none;
+    color: var(--col_blk);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.sidebar ul li a:hover {
+    color: var(--primary_col_dark);
+    transition: .5s;
+}
+
+.nav_icon_back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background: var(--col_nav_icon_back);
+    border-radius: 5px;
+
+}
+
+.sidebar ul li a i {
+    min-width: 30px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.sidebar .title {
+    padding: 0 15px;
+    font-size: 18px;
+}
+
+.main {
+    position: absolute;
+    width: calc(100% - 280px);
+    min-height: 100vh;
+    left: 280px;
+    background: var(--col_main_bg);
+}
+
+.top-bar {
+    position: fixed;
+    height: 70px;
+    width: calc(100% - 280px);
+    background: var(--col_wht);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 35px;
+    z-index: 2;
+}
+
+.mnicon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: .5s;
+}
+
+.menuicon {
+    width: 30px;
+    cursor: pointer;
+}
+
+.user {
+    position: relative;
+    background: var(--col_nav_icon_back);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    transition: .5s;
+    padding: 8px 20px;
+    color: var(--col_blk);
+    border: none;
+}
+
+.user:hover {
+    background: var(--primary_col);
+    color: var(--col_wht);
+}
+
+.user i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.data {
+    width: 90%;
+    margin: 70px auto;
+}
+
+.welcome_name {
+    font-size: 18px;
+    width: 90%;
+    margin-top: 20px;
+    padding: 0 20px;
+    font-weight: 600;
+}
+
+.search form {
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bar_wrap {
+    width: 45%;
+}
+
+.search input {
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid var(--col_table_border);
+    padding: 0 20px;
+}
+
+.search_btn {
+    padding: 8px 15px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background: var(--primary_col);
+    color: var(--col_wht);
+}
+
+.alert {
+    position: relative;
+    z-index: 10000;
+    width: 70%;
+    margin: 20px auto;
+    padding: 10px;
+    min-height: 30px;
+    text-align: center;
+    color: var(--col_wht);
+    background-color: var(--primary_col);
+    border-radius: 5px;
+}
+
+.cards {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    gap: 20px;
+
+}
+
+.card {
+    background: var(--col_wht);
+    flex-basis: 23%;
+    padding: 40px 15px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.profile {
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.profile_border {
+    border: 2px solid var(--primary_col);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile img {
+    width: 90%;
+    background: var(--col_text_light);
+    border-radius: 50%;
+
+}
+
+.card .name {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card .city {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.experience_fees {
+    margin: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.experience_fees .experience {
+    text-align: left;
+}
+
+.experience_fees .experience h3,
+.experience_fees .fees h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--col_text_light);
+    margin-bottom: 5px;
+}
+
+.experience_fees .fees {
+    text-align: right;
+}
+
+.btn_div {
+    margin-top: 30px;
+}
+
+.book_btn {
+    background: transparent;
+    border: 1px solid var(--col_blk);
+    padding: 10px 30px;
+    border-radius: 5px;
+    transition: .5s;
+    text-decoration: none;
+}
+
+.book_btn:hover {
+    background: var(--primary_col);
+    color: var(--col_wht);
+}
+
+
+
+@media screen and (min-width: 1000px) and (max-width: 1200px) {
+    .card {
+        margin-bottom: 20px;
+        flex-basis: 32%;
+    }
+}
+
+@media screen and (min-width: 830px) and (max-width: 1000px) {
+    .sidebar {
+        transform: translateX(-280px);
+    }
+    .main {
+        width: 100%;
+        transform: translateX(-280px);
+    }
+    .top-bar, .data {
+        width: 100%;
+    }
+    .card {
+        margin-bottom: 20px;
+        flex-basis: 32%;
+    }
+}
+
+@media screen and (min-width: 450px) and (max-width: 830px) {
+    .sidebar {
+        transform: translateX(-280px);
+    }
+    .main {
+        width: 100%;
+        transform: translateX(-280px);
+    }
+    .top-bar, .data {
+        width: 100%;
+    }
+    .search form {
+        flex-direction: column;
+    }
+    .bar_wrap {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .search input {
+        width: 100%;
+    }
+    .search_btn {
+        width: 100%;
+    }
+    .card {
+        margin-bottom: 20px;
+        flex-basis: 47%;
+    }
+    .book_btn {
+        padding: 10px 5px;
+    }
+}
+
+@media screen and (width < 450px) {
+    .sidebar {
+        transform: translateX(-280px);
+    }
+    .main {
+        width: 100%;
+        transform: translateX(-280px);
+    }
+    .top-bar, .data {
+        width: 100%;
+    }
+    .active_column {
+        display: none;
+    }
+    .search form {
+        flex-direction: column;
+    }
+    
+    .bar_wrap {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .search input {
+        width: 100%;
+    }
+    
+    .search_btn {
+        width: 100%;
+    }
+    .card {
+        margin-bottom: 20px;
+        flex-basis: 100%;
+    }
+    .book_btn {
+        padding: 10px 10px;
+    }
+}

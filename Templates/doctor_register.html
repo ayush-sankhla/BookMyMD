@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration - BookMyMD</title>
+    <link rel="icon" type="image/jpg" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/Doctor_Register_Style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $('.weekday').click(function()
+            {
+                var days = "";
+                $('.weekday:checked').each(function()
+                {
+                    days += $(this).val()+","
+                });
+                days = days.substring(0, days.length-1);
+                $('#days_values').val(days);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="site">
+        <div class="container">
+            <div class="form-box">
+                <div class="progress">
+                    <div class="logo"><a href="/"><img src="/Static/SVG_IMG/logo_2.png"></a></div>
+                    <ul class="progress_steps">
+                        <li class="step active">
+                            <span>1</span>
+                            <p>Personal</p>
+                        </li>
+                        <li class="step">
+                            <span>2</span>
+                            <p>Contact</p>
+                        </li>
+                        <li class="step">
+                            <span>3</span>
+                            <p>Address</p>
+                        </li>
+                        <li class="step">
+                            <span>4</span>
+                            <p>Clinic/Hospital Information</p>
+                        </li>
+                        <li class="step">
+                            <span>5</span>
+                            <p>Credentials</p>
+                        </li>
+                    </ul>
+                </div>
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <div class="form_one form_step active">
+                        <h2>Personal Information</h2>
+                        <p>Enter your personal details</p>
+                        <div>
+                            <label>Full Name</label>
+                            <input type="text" name="full_name" required>
+                        </div>
+                        <div>
+                            <label>Date of Birth</label>
+                            <input type="date" name="dob" required>
+                        </div>
+                        <div>
+                            <label>Father's Name</label>
+                            <input type="text" name="father_name" required>
+                        </div>
+                        <div>
+                            <label>Gender</label>
+                            <select name="gender" id="" name="gender" required>
+                                <option value="#">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Degree</label>
+                            <input type="text" name="degree" required>
+                        </div>
+                        <div>
+                            <label>Specialty</label>
+                            <input type="text" name="specialist" required>
+                        </div>
+                    </div>
+                    <div class="form_two form_step">
+                        <h2>Contact Information</h2>
+                        <p>Enter your contact details</p>
+                        <div>
+                            <label>Email</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div>
+                            <label>Personal Mobile Number</label>
+                            <input type="number" name="mob_number" required>
+                        </div>
+                        <div>
+                            <label>Clinic/Hospital Mobile Number</label>
+                            <input type="number" name="clinic_number" required>
+                        </div>
+                    </div>
+                    <div class="form_three form_step">
+                        <h2>Address Information</h2>
+                        <p>Enter your permanent address details</p>
+                        <div>
+                            <label>Address Line 1</label>
+                            <input type="text" name="add_line_1" required>
+                        </div>
+                        <div>
+                            <label>Address Line 2</label>
+                            <input type="text" name="add_line_2" required>
+                        </div>
+                        <div>
+                            <label>Landmark</label>
+                            <input type="text" name="landmark">
+                        </div>
+                        <div>
+                            <label>City</label>
+                            <input type="text" name="city" required>
+                        </div>
+                        <div>
+                            <label>State</label>
+                            <input type="text" name="state" required>
+                        </div>
+                        <div>
+                            <label>Pin code</label>
+                            <input type="number" name="pincode" required>
+                        </div>
+                    </div> 
+                    <div class="form_four form_step">
+                        <h2>Clinic/Hospital Information</h2>
+                        <p>Enter your Clinic/Hospital details</p>
+                        <div>
+                            <label>Clinic/Hospital Name</label>
+                            <input type="text" name="hospital_name" required>
+                        </div>
+                        <div>
+                            <label>Clinic/Hospital Address</label>
+                            <input type="text" name="hospital_address" required>
+                        </div>
+                        <div>
+                            <label>City</label>
+                            <input type="text" name="hospital_city" required>
+                        </div>
+                        <div>
+                            <label>State</label>
+                            <input type="text" name="hospital_state" required>
+                        </div>
+                        <div>
+                            <label>Pin code</label>
+                            <input type="number" name="hospital_pincode" required>
+                        </div>
+                        <div>
+                            <label>Fees</label>
+                            <input type="number" name="fees" required>
+                        </div>
+                        <div>
+                            <label>Experience (in Years)</label>
+                            <input type="number" name="experience" required>
+                        </div>
+                        <div>
+                            <h4>Days Available</h4>
+                            <div class="weekDays-selector">
+                                <input type="checkbox" value="Mon" id="weekday-mon" class="weekday" />
+                                <label for="weekday-mon">Mon</label>
+                                <input type="checkbox" value="Tue" id="weekday-tue" class="weekday" />
+                                <label for="weekday-tue">Tue</label>
+                                <input type="checkbox" value="Wed" id="weekday-wed" class="weekday" />
+                                <label for="weekday-wed">Wed</label>
+                                <input type="checkbox" value="Thu" id="weekday-thu" class="weekday" />
+                                <label for="weekday-thu">Thu</label>
+                                <input type="checkbox" value="Fri" id="weekday-fri" class="weekday" />
+                                <label for="weekday-fri">Fri</label>
+                                <input type="checkbox" value="Sat" id="weekday-sat" class="weekday" />
+                                <label for="weekday-sat">Sat</label>
+                                <input type="checkbox" value="Sun" id="weekday-sun" class="weekday" />
+                                <label for="weekday-sun">Sun</label>
+                            </div>
+                            <div class="checked_box_data">
+                                <input type="text" name="days_available" id="days_values" />
+                            </div>
+                        </div>
+                        <div>
+                            <label>Bio</label>
+                            <textarea name="bio" id="" cols="40" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="form_five form_step">
+                        <h2>Credentials</h2>
+                        <p>Enter your details</p>
+                        <div>
+                            <label>Registration Number</label>
+                            <input type="number" name="reg_number" required>
+                        </div>
+                        <div>
+                            <label>Medical Degree Certificate</label>
+                            <input class="file_upload" type="file" name="degree_upload" required>
+                        </div>
+                        <div>
+                            <label>Profile picture</label>
+                            <input class="file_upload" type="file" name="profile_picture" required>
+                        </div>
+                        <div>
+                            <label>Password</label>
+                            <input type="password" name="password">
+                        </div>
+                        <div>
+                            <label>Confirm Password</label>
+                            <input type="password" name="cpassword">
+                        </div>
+                        <div class="tandc">
+                            <label><input type="checkbox" required>I agree to <a href="#">Terms & conditions</a></label>
+                        </div>
+                    </div>
+                    <div class="btn_group">
+                        <button type="button" class="btn-prev" id="btn-prev" disabled>Back</button>
+                        <button type="button" class="btn-next" >Next</button>
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const nextButton = document.querySelector('.btn-next');
+        const prevButton = document.querySelector('.btn-prev');
+        const steps = document.querySelectorAll('.step');
+        const form_steps = document.querySelectorAll('.form_step');
+
+        let active = 1;
+
+        nextButton.addEventListener('click', () => {
+            active++;
+            if (active > steps.length) {
+                active = steps.length;
+            }
+            updateProgress();
+        })
+
+        prevButton.addEventListener('click', () => {
+            active--;
+            if (active < 1) {
+                active = 1;
+            }
+            updateProgress();
+        })
+
+        const updateProgress = () => {
+            console.log('steps.length =>' + steps.length)
+            console.log('active =>' + active)
+
+            steps.forEach((step, i) => {
+                if (i == (active - 1)) {
+                    step.classList.add('active');
+                    form_steps[i].classList.add('active')
+                    console.log('i =>' + i)
+                }
+                else {
+                    step.classList.remove('active');
+                    form_steps[i].classList.remove('active')
+                }
+            });
+
+            if (active === 1) {
+                prevButton.disabled = true;
+            }
+            else if (active === steps.length) {
+                nextButton.disabled = true;
+            }
+            else {
+                prevButton.disabled = false;
+                nextButton.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

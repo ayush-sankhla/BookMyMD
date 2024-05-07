@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login - BookMyMD</title>
+    <link rel="icon" type="image/png" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/User_Login_Style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'Staff_Login' %}" method="post">
+            {% csrf_token %}
+            <div class="text_field">
+                <input type="text" name="uid" required>
+                <label>User id</label>
+                <span></span>
+            </div>
+            <div class="text_field">
+                <input type="Email" name="email" required>
+                <label>Email</label>
+                <span></span>
+            </div>
+            <div class="text_field">
+                <input type="password" name="password" required>
+                <label>Password</label>
+                <span></span>
+            </div>
+            <div class="forgot_pass">
+                <a href="#">Forgot Password ?</a>
+            </div>
+            <button class="sub_btn" type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
