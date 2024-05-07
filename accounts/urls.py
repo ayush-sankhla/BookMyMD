@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from accounts import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
 
@@ -35,3 +36,6 @@ urlpatterns = [
 
 
 ]
+
+
+urlpatterns += staticfiles_urlpatterns()
