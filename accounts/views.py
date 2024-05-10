@@ -19,7 +19,14 @@ from accounts.mail import *
 
 @login_required(login_url='/login')
 def user_home(request) :
-    return render(request, 'user_home.html')
+
+    token = Email_tokens.objects.filter(user = request.user).first()
+
+    userid = token.auth_token
+
+    Appointment_obj = Appointments.objects.filter(user_id = userid)[:5]
+
+    return render(request, 'user_home.html', {'data': Appointment_obj})
 
 
 def User_Login(request) :
@@ -122,7 +129,7 @@ def Doctor_Login(request):
         if not doctor_document_result(user):
             return redirect('/doctor_verification_pending/')
         
-        return redirect('/doc/dashboard/?user={}'.format(user.auth_token))
+        return redirect('/doc/dashboard/{}'.format(user.auth_token))
 
     return render(request, 'doctor_login.html')
 
@@ -264,15 +271,26 @@ def verify(request, token):
         print(e)
 
 # @login_required(login_url='/doc_login')
-def Doctor_dashboard(request) :
+def Doctor_dashboard(request, user) :
 
-    user = request.GET.get('user')
+    # user = request.GET.get('user')
 
     Doctor_Profile_obj = Doctor_Profile.objects.get(auth_token = user)
+    Appointment_obj = Appointments.objects.filter(doctor = user)[:5]
+    Appointment_count = Appointment_obj.count()
+    Pending_appointment = Appointments.objects.filter(doctor = user,status = 'Pending')
+    Pending_appointment_count = Pending_appointment.count()
+    Confirmed_appointment = Appointments.objects.filter(doctor = user,status = 'Confirmed')
+    Confirmed_appointment_count = Confirmed_appointment.count()
 
     data = {
         'Doctor_Profile_obj' : Doctor_Profile_obj,
-
+        'Appointments' : Appointment_obj,
+        'Total' : Appointment_count,
+        'Pending_appointment' : Pending_appointment,
+        'Pending_appointment_count' : Pending_appointment_count,
+        'Confirmed_appointment' : Confirmed_appointment,
+        'Confirmed_appointment_count' : Confirmed_appointment_count
     }
 
     return render(request, 'doc_home.html', data)
@@ -284,9 +302,15 @@ def Doctor_Verification_Pending(request):
 def Staff_Home (request) :
 
     Doctor_Profile_obj = Doctor_Profile.objects.filter(is_confirmed = False).values_list('profile_picture','full_name', 'degree', 'city', 'specialist', 'auth_token')
+    Pending_Profile_Count = Doctor_Profile.objects.filter(is_confirmed = False).count()
+    Confirmed_Doctor = Doctor_Profile.objects.filter(is_confirmed = True).count()
+    Total_Count = Pending_Profile_Count + Confirmed_Doctor
 
     data = {
-        'Doctor_Profile_obj' : Doctor_Profile_obj
+        'Doctor_Profile_obj' : Doctor_Profile_obj,
+        'Pending_Profile_Count' : Pending_Profile_Count,
+        'Confirmed_Doctor' : Confirmed_Doctor,
+        'Total_Count' : Total_Count
     }
 
     return render(request, 'staff_home.html', data)
@@ -342,12 +366,14 @@ def Staff_Doctor_Profile(request, id) :
     return render(request, 'staff_doctor_profile.html', data)
 
 
+@login_required(login_url='/staff/login')
 def Staff_Doctor_Verified(request, id) :
     
     Doctor_Profile.objects.filter(auth_token = id).update(is_confirmed = True)
 
     return render (request, 'Doctor_Verified.html')
 
+@login_required(login_url='/staff/login')
 def Staff_Doctor_Reject(request, id) :
     
     if request.method == 'POST' :
@@ -423,14 +449,28 @@ def search_doctor(request) :
 
     return redirect("/user/home/")
 
-
+@login_required(login_url='/login')
 def User_Appointment(request) :
-    return render (request, 'user_all_appointments.html')
+
+    token = Email_tokens.objects.filter(user = request.user).first()
+
+    userid = token.auth_token
+
+    Appointment_obj = Appointments.objects.filter(user_id = userid)
+
+    return render(request, 'user_all_appointments.html', {'data': Appointment_obj})
 
 
 @login_required(login_url='/login/')
 def Appointment_Booking (request, id) :
-    pass
+    
+    Doctor_Profile_obj = Doctor_Profile.objects.filter(auth_token = id).first()
+
+    if Doctor_Profile_obj is None :
+        messages.success(request, 'Something went wrong!')
+        return redirect("/user/home")
+    
+    return render(request, 'user_doctor_profile.html', {'Doctor_Profile_obj': Doctor_Profile_obj})
 
 
 @login_required(login_url='/login')
@@ -440,7 +480,12 @@ def Appointment_Pending(request) :
 
         email = request.user.email
         id = request.GET.get('id')
-        date = request.GET.get('date')
+        name = request.GET.get('name')
+        date = request.GET.get('appointment_date')
+        num = request.GET.get('number')
+        alt_num = request.GET.get('alt_number')
+
+        unique_id = str(uuid.uuid4())
 
         user_obj = custom_user.objects.filter(email = email).first()
         doctor_profile_obj = Doctor_Profile.objects.filter(auth_token = id).first()
@@ -461,8 +506,8 @@ def Appointment_Pending(request) :
             for value in appointment_obj :
                 if value.doctor == id:
                     return HttpResponse(f"Appointment already book for {date} with Dr. {doctor_profile_obj.full_name}.\nPlease try with another date...")
-        
-        appointment_book_obj = Appointments.objects.create(user_id = userid, doctor = id, appointment_date = date)
+   
+        appointment_book_obj = Appointments.objects.create(user_id = userid, doctor = id,name = name ,appointment_date = date, number = num, alternate_num = alt_num, unique_id = unique_id)
 
         appointment_book_obj.save()
 
@@ -481,3 +526,141 @@ def Appointment_Pending(request) :
         return render(request, 'appointment_confirmation_pending.html', data)
     
     return redirect ('/user/home')
+
+
+def Doctor_Appointments_Pending(request, user) :
+
+    Doctor_Profile_obj = Doctor_Profile.objects.get(auth_token = user)
+    Pending_appointment = Appointments.objects.filter(doctor = user,status = 'Pending')
+
+    data = {
+        'Doctor_Profile_obj' : Doctor_Profile_obj,
+        'Pending_appointment' : Pending_appointment,
+    }
+
+    return render(request, 'doctor_all_appointments.html', data)
+
+def Doctor_Appointments_confirmed (request, user) :
+
+    Doctor_Profile_obj = Doctor_Profile.objects.get(auth_token = user)
+    Confirmed_appointment = Appointments.objects.filter(doctor = user,status = 'Confirmed')
+
+    data = {
+        'Doctor_Profile_obj' : Doctor_Profile_obj,
+        'Confirmed_appointment' : Confirmed_appointment,
+    }
+
+    return render (request, 'doctor_all_confirmed_appointments.html', data)
+
+def Doctor_Appointments_Accept (request, user) :
+
+    Doctor_Profile_obj = Doctor_Profile.objects.filter(auth_token = user).first()
+
+    if Doctor_Profile_obj is None :
+        HttpResponse("Something went wrong!")
+
+    if request.method == "GET" :
+        unique_id = request.GET.get('appointment')
+
+        Appointment_obj = Appointments.objects.filter(unique_id = unique_id)
+
+        if Appointment_obj is None :
+            HttpResponse('No Appointment Found!')
+
+        data = {
+            'unique_id' : unique_id,
+            'doctor' : Doctor_Profile_obj.auth_token
+        }
+
+        return render (request, 'Appointment_Time_Schedule.html', data)
+    
+    HttpResponse('Something went wrong!')
+
+def Doctor_Appointments_Reject (request, user) :
+
+    Doctor_Profile_obj = Doctor_Profile.objects.filter(auth_token = user).first()
+
+    if Doctor_Profile_obj is None :
+        HttpResponse("Something went wrong!")
+
+    if request.method == "GET" :
+        unique_id = request.GET.get('appointment')
+
+        Appointment_obj = Appointments.objects.filter(unique_id = unique_id)
+
+        if Appointment_obj is None :
+            HttpResponse('No Appointment Found!')
+
+        data = {
+            'unique_id' : unique_id,
+            'doctor' : Doctor_Profile_obj.auth_token
+        }
+
+        return render (request, 'appointment_reject_reason.html', data)
+    
+    HttpResponse('Something went wrong!')
+
+
+def Doctor_Appointed_Accepted_Successfully(request) :
+    if request.method == "POST" :
+        
+        id = request.POST.get('id')
+        time = request.POST.get('time')
+        doctor = request.POST.get('doctor')
+
+        Appointments_obj = Appointments.objects.filter(unique_id = id).first()
+
+        user_id = Appointments_obj.user_id
+
+        email_obj = Email_tokens.objects.filter(auth_token = user_id).first()
+
+        if Appointments_obj is None :
+            HttpResponse('Something went wrong!')
+
+        Appointments_obj.appointment_time = time
+        Appointments_obj.status = 'Confirmed'
+        Appointments_obj.save()
+
+        Doctor_Profile_obj = Doctor_Profile.objects.filter(auth_token = doctor).first()
+
+        send_appointment_confirmation_mail(email_obj.user, Appointments_obj.name, time, Doctor_Profile_obj.full_name)
+
+        data = {
+            'doctor' : Doctor_Profile_obj.auth_token
+        }
+
+        return render(request, 'appointment_successfully_accepted.html', data)
+    
+    HttpResponse('Something went wrong!')
+
+
+def Doctor_Appointed_Rejected_Successfully(request):
+    
+    if request.method == "POST" :
+        
+        id = request.POST.get('id')
+        reason = request.POST.get('reason')
+        doctor = request.POST.get('doctor')
+
+        Appointments_obj = Appointments.objects.filter(unique_id = id).first()
+
+        user_id = Appointments_obj.user_id
+
+        email_obj = Email_tokens.objects.filter(auth_token = user_id).first()
+
+        if Appointments_obj is None :
+            HttpResponse('Something went wrong!')
+
+        Doctor_Profile_obj = Doctor_Profile.objects.filter(auth_token = doctor).first()
+
+        send_appointment_rejection_mail(email_obj.user, Appointments_obj.name, reason, Doctor_Profile_obj.full_name)
+
+        data = {
+            'doctor' : Doctor_Profile_obj.auth_token
+        }
+
+        Appointments_obj.delete()
+
+        return render(request, 'appointment_reject_success.html', data)
+    
+    HttpResponse('Something went wrong!')

@@ -55,8 +55,8 @@ class Doctor_Profile (models.Model) :
     days_available = models.CharField(max_length=100)
     bio = models.CharField(max_length=300)
     reg_number = models.CharField(max_length=20)
-    degree_upload = models.FileField(upload_to='Media/Degree/', max_length=250, null=True, default=None)
-    profile_picture = models.FileField(upload_to='Media/Profile/', max_length=250, null=True, default=None)
+    degree_upload = models.FileField(upload_to='Media/Media/Degree/', max_length=250, null=True, default=None)
+    profile_picture = models.FileField(upload_to='Media/Media/Profile/', max_length=250, null=True, default=None)
     password = models.CharField(max_length=128)
 
     # For Email Verification
@@ -88,8 +88,12 @@ class Staff(models.Model) :
 
 class Appointments (models.Model) :
     # user = models.OneToOneField(custom_user, on_delete= models.CASCADE, unique=False)
+    unique_id = models.CharField(max_length=100)
     user_id = models.CharField(max_length=100)
     doctor = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, default='')
     appointment_date = models.DateField()
-    appointment_time = models.CharField(max_length=100)
+    appointment_time = models.CharField(max_length=100, default='Not Scheduled')
+    number = models.IntegerField(default=1)
+    alternate_num = models.IntegerField(default=1)
     status = models.CharField(max_length=10, default='Pending')

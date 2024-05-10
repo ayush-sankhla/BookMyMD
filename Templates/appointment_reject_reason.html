@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Rejection - BookMyMD</title>
+    <link rel="icon" type="image/png" href="/Static/SVG_IMG/logo_3.png">
+    <link rel="stylesheet" href="/Static/CSS/Appointment_Time_Schedule_Style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h3>Complete the following details</h3>
+            <form action="/doc/appointment/rejected" method="post">
+                {% csrf_token %}
+                <input type="text" name="id" value="{{unique_id}}" hidden>
+                <input type="text" name="doctor" value="{{doctor}}" hidden>
+                <label for="">Reason for rejection</label>
+                <textarea rows="7" class="reason" name="reason"></textarea>
+                <button type="submit" class="btn">Reject</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -12,6 +12,8 @@
     --col_text_light: #2d2d2d;
     --col_table_border: #787878;
     --col_table_row_bg: #eaeaea;
+    --accept_i: rgb(36, 179, 36);
+    --reject_i: red;
 }
 
 
@@ -343,7 +345,7 @@ td i {
 }
 
 .Profile_picture {
-    width: 6%;
+    width: 5%;
 }
 
 .Doc_Name {
@@ -353,20 +355,31 @@ td i {
 }
 
 .Doc_Degree {
-    width: 15%;
+    width: 20%;
 }
 
 .Doc_City {
-    width: 14%;
+    width: 20%;
 }
 
 .Specialist {
-    width: 25%;
+    width: 15%;
 }
 
 .Action {
     width: 10%;
-    text-align: center;
+}
+
+.Action a i {
+    font-size: 20px;
+}
+
+.Action a .fa-circle-check {
+    color: var(--accept_i);
+}
+
+.Action a .fa-circle-xmark {
+    color: var(--reject_i);
 }
 
 @media screen and (min-width: 830px) and (max-width: 1000px) {

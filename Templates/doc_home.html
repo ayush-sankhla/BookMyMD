@@ -26,7 +26,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/staff/home">
+                    <a href="/doc/dashboard/{{Doctor_Profile_obj.auth_token}}">
                         <div class="nav_icon_back">
                             <i class="fa-solid fa-desktop"></i>
                         </div>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/staff/home">
+                    <a href="/doc/appointments/pending/{{Doctor_Profile_obj.auth_token}}">
                         <div class="nav_icon_back">
                             <i class="fa-solid fa-calendar-check"></i>
                         </div>
@@ -42,11 +42,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/staff/home/verification/pending">
+                    <a href="/doc/appointments/confirmed/{{Doctor_Profile_obj.auth_token}}">
                         <div class="nav_icon_back">
                             <i class="fa-solid fa-clock"></i>
                         </div>
-                        <div class="title">Pending Pending</div>
+                        <div class="title">Confirmed Appointments</div>
                     </a>
                 </li>
             </ul>
@@ -56,12 +56,11 @@
                 <div class="mnicon">
                     <img onclick="sidebar()" class="menuicon" src="/Static/SVG_IMG/Menu_icon.svg">
                 </div>
-                <form method="post" action="{% url 'Logout_Staff' %}">
-                    {% csrf_token %}
-                    <button class="user" type="submit">
+                <form method="post" action="/doc_login">
+                    <a href="/doc_login"><button class="user" type="button">
                         <i class="fa-solid fa-user"></i>
                         <span>Logout</span>
-                    </button>
+                    </button></a>
                 </form>
             </div>
             <div class="data">
@@ -78,7 +77,7 @@
                             <i class="fa-solid fa-user-check"></i>
                         </div>
                         <div class="card-content">
-                            <div class="number">100</div>
+                            <div class="number">{{Confirmed_appointment_count}}</div>
                             <div class="card-name">Confirmed Appointments</div>
                         </div>
                     </div>
@@ -87,7 +86,7 @@
                             <i class="fa-solid fa-user-clock"></i>
                         </div>
                         <div class="card-content">
-                            <div class="number">200</div>
+                            <div class="number">{{Pending_appointment_count}}</div>
                             <div class="card-name">Pending Appointments</div>
                         </div>
                     </div>
@@ -96,7 +95,7 @@
                             <i class="fa-regular fa-hospital"></i>
                         </div>
                         <div class="card-content">
-                            <div class="number">100</div>
+                            <div class="number">{{Total}}</div>
                             <div class="card-name">Total Appointments</div>
                         </div>
                     </div>
@@ -108,26 +107,32 @@
                                 <i class="fa-solid fa-hourglass-half"></i>
                                 <h2>Pending Appointments</h2>
                             </div>
-                            <a href="/staff/home/verification/pending" class="btn">View All</a>
+                            <a href="/doc/appointments/pending/{{Doctor_Profile_obj.auth_token}}" class="btn">View All</a>
                         </div>
                         <table class="requests">
 
-                            {% if False %}
-                                {% for value in Doctor_Profile_obj %}
-                                    <tr>
-                                        <td class="Profile_picture"><img src="/Media/{{value.0}}"></td>
-                                        <td class="Doc_Name">{{value.1}}</td>
-                                        <td class="Doc_Degree">{{value.2}}</td>
-                                        <td class="Doc_City active_column">{{value.3}}</td>
-                                        <td class="Specialist active_column">{{value.4}}</td>
-                                        <td class="Action">
-                                            <a href="/staff/doctor/profile/{{value.5}}"><i class="fa fa-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            {% else %}
-                                <div class="no_request">No Verification Request</div>
-                            {% endif %}
+                        {% if Pending_appointment %}
+                            {% for value in Pending_appointment %}
+                                <tr>
+                                    <td class="Profile_picture">{{forloop.counter}}</td>
+                                    <td class="Doc_Name">{{value.name}}</td>
+                                    <td class="Doc_Degree">{{value.appointment_date}}</td>
+                                    <td class="Doc_City active_column">{{value.appointment_time}}</td>
+                                    <td class="Specialist active_column">{{value.number}}</td>
+                                    <td class="Action">
+                                        <a href="/doc/appointments/accept/{{Doctor_Profile_obj.auth_token}}/?appointment={{value.unique_id}}">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                        </a>
+                                        <a href="/doc/appointments/reject/{{Doctor_Profile_obj.auth_token}}/?appointment={{value.unique_id}}">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <div class="no_request">No Appointments avialable</div>
+                        {% endif %}
+                       
                         </table>
                     </div>
                     <div class="pending_request">
@@ -136,25 +141,21 @@
                                 <i class="fa-solid fa-hourglass-half"></i>
                                 <h2>Upcoming Appointments</h2>
                             </div>
-                            <a href="/staff/home/verification/pending" class="btn">View All</a>
+                            <a href="/doc/appointments/confirmed/{{Doctor_Profile_obj.auth_token}}" class="btn">View All</a>
                         </div>
                         <table class="requests">
-
-                            {% if False %}
-                                {% for value in Doctor_Profile_obj %}
+                            {% if Confirmed_appointment %}
+                                {% for value in Confirmed_appointment %}
                                     <tr>
-                                        <td class="Profile_picture"><img src="/Media/{{value.0}}"></td>
-                                        <td class="Doc_Name">{{value.1}}</td>
-                                        <td class="Doc_Degree">{{value.2}}</td>
-                                        <td class="Doc_City active_column">{{value.3}}</td>
-                                        <td class="Specialist active_column">{{value.4}}</td>
-                                        <td class="Action">
-                                            <a href="/staff/doctor/profile/{{value.5}}"><i class="fa fa-edit"></i></a>
-                                        </td>
+                                        <td class="Profile_picture">{{forloop.counter}}</td>
+                                        <td class="Doc_Name">{{value.name}}</td>
+                                        <td class="Doc_Degree">{{value.appointment_date}}</td>
+                                        <td class="Doc_City active_column">{{value.appointment_time}}</td>
+                                        <td class="Specialist active_column">{{value.number}}</td>
                                     </tr>
                                 {% endfor %}
                             {% else %}
-                                <div class="no_request">No Verification Request</div>
+                                <div class="no_request">No Confirmed avialable</div>
                             {% endif %}
                         </table>
                     </div>

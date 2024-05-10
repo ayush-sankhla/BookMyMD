@@ -8,6 +8,7 @@
     <link rel="icon" type="image/jpg" href="/Static/SVG_IMG/logo_3.png">
     <link rel="stylesheet" href="/Static/CSS/USer_Doctor_Profile_Style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -15,13 +16,6 @@
         <header class="header">
             <div class="logo">
                 <img src="/Static/SVG_IMG/logo_2.png" alt="">
-            </div>
-            <div class="appointment_booking">
-                <form action="{% url 'Appointment_Booking' %}" method="post">
-                    {% csrf_token %}
-                    <input type="date" name="appointment_date">
-                    <button type="submit">Book Appointment</button>
-                </form>
             </div>
         </header>
 
@@ -55,15 +49,11 @@
 
         <section class="user_details card">
             <div class="details">
-                <h1>{{Doctor_Profile_obj.full_name}}</h1>
+                <h1 class="heading">Dr. {{Doctor_Profile_obj.full_name}}</h1>
             </div>
             <div class="info">
-                <span class="data_head">Bio :</span>
                 <span class="data">{{Doctor_Profile_obj.bio}}</span>
             </div>
-        </section>
-
-        <section class="address_info card">
             <div class="hospital_address_info">
                 <h1 class="heading">Hospital Address</h1>
                 <div class="add_info">
@@ -80,6 +70,54 @@
                 </div>
             </div>
         </section>
+
+        <section class="booking_form card">
+            <div class="booking_info">
+                <h1 class="heading">Booking Information</h1>
+                <form action="{% url 'Appointment_Pending' %}" method="get">
+                    <div class="fields">
+                        <div class="input_field">
+                            <label>Name</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="input_field">
+                            <label>Appointment Date</label>
+                            <input type="date" id="txtDate" name="appointment_date" />
+                        </div>
+                        <div class="input_field">
+                            <label>Enter Mobile Number</label>
+                            <input type="number" name="number" required>
+                        </div>
+                        <div class="input_field">
+                            <label>Alternate Mobile Number</label>
+                            <input type="number" name="alt_number" required>
+                        </div>
+                        <div class="input_field">
+                            <input type="text" name="id" value="{{Doctor_Profile_obj.auth_token}}" hidden>
+                        </div>
+                    </div>
+                    <button type="submit" class="book_sub_btn">Book</button>
+                </form>
+            </div>
+        </section>
     </div>
+
+    <script>
+    $(function(){
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+
+        var minDate= year + '-' + month + '-' + day;
+
+        $('#txtDate').attr('min', minDate);
+    });
+    </script>
 </body>
 </html>

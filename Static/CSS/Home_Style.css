@@ -283,6 +283,11 @@ nav{
     font-size: 0.8rem;
 }
 
+.cat_card a {
+    text-decoration: none;
+    color: var(--primary_col);
+}
+
 .explore_link {
     position: absolute;
     bottom: 10px;

@@ -340,7 +340,7 @@ td i {
 }
 
 .Profile_picture {
-    width: 6%;
+    width: 5%;
 }
 
 .Doc_Name {
@@ -350,15 +350,15 @@ td i {
 }
 
 .Doc_Degree {
-    width: 15%;
+    width: 20%;
 }
 
 .Doc_City {
-    width: 14%;
+    width: 20%;
 }
 
 .Specialist {
-    width: 25%;
+    width: 15%;
 }
 
 .Action {
