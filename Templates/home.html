@@ -24,14 +24,14 @@
                     <li class="sidenav"><a href="/about">About</a></li>
                     <li class="sidenav"><a href="/doc_login">Doctors</a></li>
                     <li class="sidenav"><a href="/user/home">Appointments</a></li>
-                    <li class="sidenav"><a href="">Contact Us</a></li>
+                    <li class="sidenav"><a href="/contact">Contact Us</a></li>
                 </ul>
                 <ul class="nav_links">
                     <li class="nav_links"><a href="/">Home</a></li>
                     <li class="nav_links"><a href="/about">About</a></li>
                     <li class="nav_links"><a href="/doc_login">Doctors</a></li>
                     <li class="nav_links"><a href="/user/home">Appointments</a></li>
-                    <li class="nav_links"><a href="">Contact Us</a></li>
+                    <li class="nav_links"><a href="/contact">Contact Us</a></li>
                 </ul>
                 <div class="mnicon">
                     <a href="{% url 'User_Login' %}"><button class="login_btn">Login</button></a>
@@ -220,7 +220,7 @@
                             <li><a href="/about">About</a></li>
                             <li><a href="/doc_login">Doctors</a></li>
                             <li><a href="/user/home">Patients</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="/contact/">Contact Us</a></li>
                         </ul>
                     </div>
                     <div class="footer_col">
@@ -250,7 +250,6 @@
             const sidebar = document.querySelector('.sidebar')
             sidebar.style.transform = 'translateX(450px)'
         }
-
 
         window.addEventListener("scroll", function () {
             var nav = document.querySelector('nav');
