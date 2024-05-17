@@ -10,7 +10,7 @@ def verification_rejection_mail (name, email, reason) :
 
 def send_token_via_mail (email, token):
     subject = "Verify your account"
-    message = f"Dear User,\n\nThank you for registering with BookMyMD. To ensure that we have the correct email address on file and to activate your account, please confirm your email address by clicking on the link below:\n\nhttps://localhost:8000/verify?{token}\n\nIf the above link does not work, please copy and paste the following URL into your web browser.\n\nPlease note that this link is valid for a limited time only.\nIf you did not register for an account with [Your Company Name], please disregard this email. If you have any questions or concerns, please contact our support team at [Your Contact Information].\n\nThank you for choosing [Your Company Name].\n\nBest regards,\nBookMyMD"
+    message = f"Dear User,\n\nThank you for registering with BookMyMD. To ensure that we have the correct email address and to activate your account, please confirm your email address by clicking on the link below:\n\nhttps://bookmymd.onrender.com/verify/{token}\n\nIf the above link does not work, please copy and paste the following URL into your web browser.\n\nPlease note that this link is valid for a limited time only.\nIf you did not register for an account with BookMyMD, please disregard this email. If you have any questions or concerns, please contact our support team.\n\nThank you for choosing BookMyMD.\n\nBest regards,\nBookMyMD"
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message, email_from, recipient_list)
