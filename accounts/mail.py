@@ -3,7 +3,7 @@ from django.conf import settings
 
 def verification_rejection_mail (name, email, reason) :
     subject = 'Verification Failed!'
-    message = f'Hi {name}, Your Account verification is failed due to {reason}'
+    message = f'Hi {name}, Your Account verification is failed due to {reason}\n\nYou can reapply for verification with corrected documents.'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message, email_from, recipient_list)

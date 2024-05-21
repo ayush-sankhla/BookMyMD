@@ -301,6 +301,14 @@ def Doctor_Verification_Pending(request):
 @login_required(login_url='/staff/login')
 def Staff_Home (request) :
 
+    user = request.user
+
+    staff_obj = Staff.objects.filter(user = user).first()
+    print(staff_obj)
+    
+    if staff_obj is None :
+        return redirect('/staff/login')
+
     Doctor_Profile_obj = Doctor_Profile.objects.filter(is_confirmed = False).values_list('profile_picture','full_name', 'degree', 'city', 'specialist', 'auth_token')
     Pending_Profile_Count = Doctor_Profile.objects.filter(is_confirmed = False).count()
     Confirmed_Doctor = Doctor_Profile.objects.filter(is_confirmed = True).count()
